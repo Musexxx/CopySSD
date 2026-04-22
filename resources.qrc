@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ldb.ico</file>
+    </qresource>
+</RCC>

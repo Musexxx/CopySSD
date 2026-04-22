@@ -1,0 +1,58 @@
+# ===== 完全不应该提交（会导致问题）=====
+# 构建产物
+build/
+build-*/
+cmake-build-*/
+out/
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.obj
+*.o
+*.lib
+*.exp
+
+# IDE 个人配置
+*.user
+*.user.*
+.idea/
+.vscode/
+.qtc_clangd/
+.qtc/
+
+# CMake 生成文件
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+.ninja_log
+.ninja_deps
+*_autogen/
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.moc
+
+# 敏感配置
+
+*.key
+*.pem
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== 不适合提交（没必要）=====
+# 备份文件
+*_backup*
+*~
+*.bak
+
+# 日志和临时文件
+*.log
+*.tmp
+*.temp
+*.cache
