@@ -523,8 +523,14 @@ void FullScreenAlertDialog::keyPressEvent(QKeyEvent* event)
         }
         break;
     case Qt::Key_Escape:
-        // ESC键：关闭窗口（兜底机制）
-        onCloseClicked();
+        // ESC键：根据类型决定行为
+        // 料号确认窗口：接受料号（与全局事件过滤器行为一致）
+        // 其他类型：关闭窗口
+        if (m_type == MaterialConfirm) {
+            onConfirmClicked();
+        } else {
+            onCloseClicked();
+        }
         break;
     default:
         QDialog::keyPressEvent(event);
@@ -589,13 +595,13 @@ bool FullScreenAlertDialog::eventFilter(QObject* obj, QEvent* event)
                 
                 // 根据窗口类型选择关闭方式
                 if (topDialog->m_type == MaterialConfirm) {
-                    // 料号确认窗口：按拒绝处理（相当于用户点击"拒绝料号"按钮）
-                    if (topDialog->m_rejectButton && topDialog->m_rejectButton->isVisible()) {
-                        topDialog->onRejectClicked();
+                    // 料号确认窗口：按接受处理（相当于用户点击"确认添加"按钮）
+                    if (topDialog->m_confirmButton && topDialog->m_confirmButton->isVisible()) {
+                        topDialog->onConfirmClicked();
                     } else {
-                        // 如果没有拒绝按钮，直接关闭并触发拒绝回调
+                        // 如果没有确认按钮，直接关闭并触发确认回调
                         topDialog->removeGlobalEventFilter();
-                        topDialog->reject();
+                        topDialog->accept();
                         topDialog->close();
                     }
                 } else {
